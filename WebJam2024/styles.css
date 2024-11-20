@@ -3,10 +3,6 @@ body {
     text-align: center;
 }
 
-#upload-area {
-    margin: 20px;
-}
-
 #photo-bank {
     display: flex;
     flex-wrap: wrap;
