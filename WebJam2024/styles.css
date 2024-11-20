@@ -9,11 +9,12 @@ body {
     gap: 10px;
     justify-content: center;
     margin-top: 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
 }
 
 #photo-bank img {
     max-width: 150px;
     max-height: 150px;
     border: 1px solid #000;
-    border-radius: 5px
 }
