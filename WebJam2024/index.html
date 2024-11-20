@@ -10,10 +10,21 @@
         <h1>Rio</h1>
         <h3>Create and edit photo strips!</h3>
         
+        <!-- File Input -->
         <div>
             <input type="file" id="file-input" multiple accept="image/*">
         </div>
         <div id="photo-bank"></div>
+
+        <!-- Photostrip Slider -->
+        <div class="slider-container">
+            <button id="prevBtn" class="slider-btn">Previous</button>
+            <div class="slider">
+              <img id="sliderImage" src="./images/photostrip_single.png" alt="photostrips">
+            </div>
+            <button id="nextBtn" class="slider-btn">Next</button>
+          </div>
+
         <script src="app.js"></script>
     </body>
 </html>

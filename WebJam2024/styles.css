@@ -15,5 +15,43 @@ body {
     max-width: 150px;
     max-height: 150px;
     border: 1px solid #000;
-    border-radius: 5px
+    border-radius: 5px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider {
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ddd;
+    border-radius: 10px;
+}
+
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* Ensures the whole image fits within the container */
+    border-radius: 10px;
+}
+
+.slider-btn {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.slider-btn:hover {
+    background-color: #0056b3;
 }
