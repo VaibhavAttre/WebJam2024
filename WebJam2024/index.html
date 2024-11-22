@@ -3,13 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        
+        <script src = "http://cdnjs.cloudflare.com/ajax/libs/camanjs/3.3.0/caman.full.min.js"></script>        
         <link href="styles.css" rel="stylesheet">
-
-        <!-- TailwindCSS  CDN -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
-
         <title>Rio</title>
     </head>
     <body class="h-screen overflow-hidden">
@@ -44,5 +41,17 @@
 
             <script src="app.js"></script>
         </div>
+        <div id="photo-bank" class = "photo-container"></div>
+        <label for="filter-changer">Drag a filter to an image:</label>
+        <div id="filter-bank">
+            <div class="filter" id="none" draggable="true">None</div>
+            <div class="filter" id="grayscale" draggable="true">Grayscale</div>
+            <div class="filter" id="sepia" draggable="true">Sepia</div>
+            <div class="filter" id="invert" draggable="true">Invert</div>
+            <div class="filter" id="blur" draggable="true">Blur</div>
+            <div class="filter" id="polaroid" draggable="true">Polaroid</div>
+            <div class="filter" id="brandywine" draggable="true">Brandywine</div>
+        </div>
+        <script src="app.js"></script>
     </body>
 </html>
