@@ -21,11 +21,24 @@
                     <input type="file" id="file-input" multiple accept="image/*">
                 </div>
             </div>
-
             <div class="w-5/6 flex-grow mx-auto bg-gray-200 gap-4 gap-y-2 p-4 justify-items-start
             grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] overflow-auto"
             id="photo-bank"></div>
         </div>
+            <!-- Photostrip Slider -->
+            <div class="h-full w-1/2 mt-20 mr-8">
+                <div class="flex h-1/2 justify-center items-center mt-8 overflow-hidden">
+                    <div class="photo-strip flex-col">
+                        <div class="drop-zone" data-slot="1">Drop Here</div>
+                        <div class="drop-zone" data-slot="2">Drop Here</div>
+                        <div class="drop-zone" data-slot="3">Drop Here</div>
+                        <div class="drop-zone" data-slot="4">Drop Here</div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center my-4 gap-2">
+                    <button id="saveBtn" class="slider-btn">Save</button>
+                </div>
+            </div>
 
         <!-- Photostrip Slider -->
         <div class="h-full w-1/2 mt-20 mr-8">
