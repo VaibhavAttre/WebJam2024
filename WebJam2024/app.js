@@ -1,15 +1,22 @@
 const fileInput = document.getElementById('file-input');
 const photoBank = document.getElementById('photo-bank');
+const filters = document.querySelectorAll('.filter');
 let currentFilter = 'none';
 
-fileInput.addEventListener('change', handleFiles);
-
-const filters = document.querySelectorAll('.filter');
 filters.forEach(filter => {
     filter.addEventListener('dragstart', (e) => {
         currentFilter = e.target.id;
     });
 });
+
+photoBank.addEventListener('dragstart', handleDragStart);
+
+function handleDragStart(event) {
+    console.log(event.target.src);
+    event.dataTransfer.setData('text/plain', event.target.src);
+}
+
+fileInput.addEventListener('change', handleFiles);
 
 function handleFiles() {
     const files = fileInput.files;
@@ -119,10 +126,6 @@ function getFilterStyle(filterType) {
     }
 }
 
-function handleDragStart(event) {
-    event.dataTransfer.setData('text/plain', event.target.src);
-}
-
 const dropZones = document.querySelectorAll('.drop-zone');
 
 dropZones.forEach(zone => {
@@ -140,12 +143,16 @@ dropZones.forEach(zone => {
         event.currentTarget.classList.remove('over');
         event.currentTarget.style.border = 'none';
 
+        console.log(event.dataTransfer.getData('text/plain'));
         const imageSrc = event.dataTransfer.getData('text/plain');
         const imageId = event.dataTransfer.getData('image-id');
 
         const img = document.createElement('img');
         img.src = imageSrc;
         img.setAttribute('data-id', imageId);
+        img.style.width = zone.style.width;
+        img.style.height = zone.style.height;
+        img.style.objectFit = 'cover';
 
 
         event.currentTarget.innerHTML = '';
