@@ -79,6 +79,9 @@ let currentIndex = 0;
 const sliderImage = document.getElementById('sliderImage');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
+const saveBtn = document.getElementById('saveBtn');
+const savedPhotostripsContainer = document.getElementById('savedPhotostripsContainer');
+const downloadAllBtn = document.getElementById('downloadAllBtn')
 
 // Update the image in the slider
 function updateImage() {
@@ -95,4 +98,49 @@ prevBtn.addEventListener('click', () => {
 nextBtn.addEventListener('click', () => {
     currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
     updateImage();
+});
+
+saveBtn.addEventListener('click', savePhotostrip);
+
+function savePhotostrip() {
+    const currentSrc = sliderImage.src;
+
+    const photostripDiv = document.createElement('div');
+    photostripDiv.classList.add('relative', 'bg-white', 'p-2', 'rounded', 'shadow-md', 'flex', 'items-center', 'justify-center');
+    
+    const photostripImg = document.createElement('img');
+    photostripImg.src = currentSrc;
+    photostripImg.alt = 'Saved Photostrip';
+    photostripImg.classList.add('w-full', 'h-auto', 'rounded');
+
+    photostripDiv.appendChild(photostripImg);
+    savedPhotostripsContainer.appendChild(photostripDiv);
+}
+
+downloadAllBtn.addEventListener('click', () => {
+    const photostripImages = savedPhotostripsContainer.querySelectorAll('img');
+    if (photostripImages.length === 0) {
+        alert('No photostrips to download.');
+        return;
+    }
+
+    const zip = new JSZip();
+    const folder = zip.folder("Photostrips");
+
+    photostripImages.forEach((img, index) => {
+        const imgSrc = img.src;
+        fetch(imgSrc)
+            .then(response => response.blob())
+            .then(blob => {
+                folder.file(`photostrip_${index + 1}.png`, blob);
+                if (index === photostripImages.length - 1) {
+                    zip.generateAsync({ type: "blob" }).then(content => {
+                        const a = document.createElement('a');
+                        a.href = URL.createObjectURL(content);
+                        a.download = 'Photostrips.zip';
+                        a.click();
+                    });
+                }
+            });
+    });
 });
