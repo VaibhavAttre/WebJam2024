@@ -13,8 +13,7 @@
 </head>
 <body class="h-screen overflow-hidden">
     <div class="flex h-full gap-8">
-        <div class="flex flex-col items-start h-full pb-16 pt-8
-        w-1/2 bg-gray-100">
+        <div class="flex flex-col items-start h-full pb-16 pt-8 w-1/2">
             <div class="flex flex-col w-5/6 mx-auto items-start">
                 <p class="sm:text-4xl md:text-5xl lg:text-6xl font-bold">Rio</p>
                 <p class="sm:text-1xl md:text-2xl lg:text-3xl font-semibold">Create and edit photo strips!</p>
@@ -23,7 +22,7 @@
                     <input type="file" id="file-input" multiple accept="image/*">
                 </div>
             </div>
-            <div class="w-5/6 flex-grow mx-auto bg-gray-200 gap-4 gap-y-2 p-4 justify-items-start
+            <div class="w-5/6 flex-grow mx-auto gap-4 gap-y-2 p-4 justify-items-start
             grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] overflow-auto"
             id="photo-bank"></div>
         </div>
@@ -38,7 +37,8 @@
             </div>
             <button class="slider-btn w-5/6 mt-10" id="saveBtn">Save</button>
         </div>
-
+        
+        <!-- Filters, saving and downloading -->
         <div class="flex flex-col w-1/4 h-5/6 gap-4 ml-8 mt-16 mr-16">
             <p class="text-lg font-bold mb-2">Drag a filter to an image:</p>
             <div class="flex flex-col gap-2">
@@ -52,7 +52,7 @@
             </div>
 
             <p class="text-lg font-bold mb-2">Saved Photostrips</p>
-            <div class="w-full flex-grow mx-auto bg-gray-200 justify-items-start
+            <div class="w-full flex-grow mx-auto justify-items-start object-container
             grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] gap-4 overflow-auto"
             id="savedPhotostripsContainer"></div>
             <button class="slider-btn justify-center" 

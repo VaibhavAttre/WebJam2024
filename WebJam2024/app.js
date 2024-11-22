@@ -36,7 +36,7 @@ function handleFiles() {
 
                     const imgElem = document.createElement('img');
                     imgElem.src = reader.result;
-                    imgElem.classList.add('original-image', 'w-auto', 'h-full', 'rounded-lg');
+                    imgElem.classList.add('original-image', 'w-auto', 'h-full');
 
                     if (currentFilter !== 'none') {
                         applyImageFilter(imgElem, currentFilter);
