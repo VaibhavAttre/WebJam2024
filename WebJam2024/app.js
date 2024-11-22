@@ -1,19 +1,18 @@
-
-
-const fileInput = document.getElementById('file-input')
-const photoBank = document.getElementById('photo-bank')
-const filterChanger = document.getElementById("filter-changer");
-
-fileInput.addEventListener('change', handleFiles)
+const fileInput = document.getElementById('file-input');
+const photoBank = document.getElementById('photo-bank');
 let currentFilter = 'none';
+
+// Handle file input (photo upload)
+fileInput.addEventListener('change', handleFiles);
 
 const filters = document.querySelectorAll('.filter');
 filters.forEach(filter => {
     filter.addEventListener('dragstart', (e) => {
-        currentFilter = e.target.id; 
+        currentFilter = e.target.id;  // Store the currently dragged filter
     });
 });
 
+// Handle image file upload and display
 function handleFiles() {
     const files = fileInput.files;
 
@@ -28,13 +27,13 @@ function handleFiles() {
                 img.onload = () => {
                     // Create the image container
                     const imgContainer = document.createElement('div');
-                    imgContainer.classList.add('image-wrapper');
+                    imgContainer.classList.add('image-wrapper', 'p-4', 'rounded-lg', 'bg-white', 'shadow-md', 'drop-shadow-xl'); // Tailwind styles for container
                     imgContainer.classList.add('droppable'); // Make the image droppable
 
                     // Create an image element for display
                     const imgElem = document.createElement('img');
                     imgElem.src = reader.result;
-                    imgElem.classList.add('original-image');
+                    imgElem.classList.add('original-image', 'w-full', 'h-auto', 'rounded-lg'); // Tailwind styles for image
                     imgContainer.appendChild(imgElem);
 
                     // Create the canvas element for applying filters
@@ -144,3 +143,77 @@ function applyFilter(canvas, filterType) {
         this.render();
     });
 }
+
+// Dragging images from the photobank out
+
+function handleDragStart(event) {
+    // Store the dragged image's source in the data transfer object
+    event.dataTransfer.setData('text/plain', event.target.src);
+}
+
+const dropZones = document.querySelectorAll('.drop-zone');
+
+dropZones.forEach(zone => {
+    zone.addEventListener('dragover', (event) => {
+        event.preventDefault(); // Necessary to allow drop
+        event.currentTarget.classList.add('over'); // Highlight the drop zone
+    });
+
+    zone.addEventListener('dragleave', (event) => {
+        event.currentTarget.classList.remove('over'); // Remove highlight
+    });
+
+    // Drop event listener
+    zone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        event.currentTarget.classList.remove('over');
+
+        // Get the dropped image source and ID
+        const imageSrc = event.dataTransfer.getData('text/plain');
+        const imageId = event.dataTransfer.getData('image-id');
+
+        // Fill the drop zone with the image
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.setAttribute('data-id', imageId);
+
+        // Clear any existing content in the drop zone
+        event.currentTarget.innerHTML = '';
+        event.currentTarget.appendChild(img);
+    });
+});
+
+// Array of image paths
+const images = [
+    { src: "./images/photostrip_double.png", type: "double" },
+    { src: "./images/photostrip_horiz.png", type: "horiz" },
+    { src: "./images/photostrip_horiz2.png", type: "horiz2" },
+    { src: "./images/photostrip_horiz3.png", type: "horiz3" },
+    { src: "./images/photostrip_single.png", type: "single" },
+    { src: "./images/photostrip_single2.png", type: "single2" }, 
+    { src: "./images/photostrip_vert.png", type: "vert" }
+];
+  
+let currentIndex = 0;
+
+// Elements
+const sliderImage = document.getElementById('sliderImage');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+// Update the image in the slider
+function updateImage() {
+    sliderImage.src = images[currentIndex].src;
+    sliderImage.setAttribute("data-type", type);
+}
+
+// Event Listeners
+prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+    updateImage();
+});
+
+nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+    updateImage();
+});
