@@ -11,6 +11,10 @@ const filters = document.querySelectorAll('.filter');
 filters.forEach(filter => {
     filter.addEventListener('dragstart', (e) => {
         currentFilter = e.target.id; 
+        filter.classList.add('bg-blue-600', 'text-white');
+    });
+    filter.addEventListener('dragend', (e) => {
+        e.target.classList.remove('bg-blue-600', 'text-white');
     });
 });
 
