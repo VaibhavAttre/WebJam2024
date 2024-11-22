@@ -1,10 +1,10 @@
-const fileInput = document.getElementById('file-input')
+const photoFileInput = document.getElementById('file-input')
 const photoBank = document.getElementById('photo-bank')
 
-fileInput.addEventListener('change', handleFiles)
+photoFileInput.addEventListener('change', handlePhotoFiles)
 
-function handleFiles() {
-    const files = fileInput.files;
+function handlePhotoFiles() {
+    const files = photoFileInput.files;
 
     for (const file of files) {
         if (file.type.startsWith('image/')) {
