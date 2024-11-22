@@ -23,7 +23,7 @@ function handlePhotoFiles() {
     }
 }
 
-// Dragging images from the photobank out
+// Dragging images from the photobank out/
 
 function handleDragStart(event) {
     // Store the dragged image's source in the data transfer object
