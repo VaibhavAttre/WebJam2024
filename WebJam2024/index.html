@@ -32,12 +32,15 @@
 
             <!-- Photostrip Slider -->
             <div class="h-full w-1/2 mt-20 mr-8">
-                <div class="flex h-2/3 justify-center items-center mt-8 overflow-hidden">
-                    <img class="max-h-full" id="sliderImage" src="./images/photostrip_single.png" alt="photostrips">
+                <div class="flex h-1/2 justify-center items-center mt-8 overflow-hidden">
+                    <div class="photo-strip flex-col">
+                        <div class="drop-zone" data-slot="1">Drop Here</div>
+                        <div class="drop-zone" data-slot="2">Drop Here</div>
+                        <div class="drop-zone" data-slot="3">Drop Here</div>
+                        <div class="drop-zone" data-slot="4">Drop Here</div>
+                    </div>
                 </div>
                 <div class="flex justify-center items-center my-4 gap-2">
-                    <button id="prevBtn" class="slider-btn">Previous</button>
-                    <button id="nextBtn" class="slider-btn">Next</button>
                     <button id="saveBtn" class="slider-btn">Save</button>
                 </div>
             </div>
