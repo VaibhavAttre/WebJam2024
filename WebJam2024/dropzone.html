@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        
+        <link href="styles.css" rel="stylesheet">
+
+        <!-- TailwindCSS  CDN -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <title>Rio</title>
+    </head>
+    <body class="h-screen overflow-hidden">
+        <div class="flex h-full gap-8">
+            <div class="flex flex-col items-start h-full pb-16 pt-8
+            w-1/2 bg-gray-100">
+                <div class="flex flex-col w-5/6 mx-auto items-start">
+                    <p class="sm:text-4xl md:text-5xl lg:text-6xl font-bold">Rio</p>
+                    <p class="sm:text-1xl md:text-2xl lg:text-3xl font-semibold">Create and edit photo strips!</p>
+                    
+                    <div class="my-4">
+                        <input type="file" id="file-input" multiple accept="image/*">
+                    </div>
+                </div>
+
+                <div class="w-5/6 flex-grow mx-auto bg-gray-200 gap-4 gap-y-2 p-4 justify-items-start
+                grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] overflow-auto"
+                id="photo-bank"></div>
+            </div>
+
+            <!-- Photostrip Slider -->
+            <div class="h-full w-1/2 mt-20 mr-8">
+                <div class="flex h-2/3 justify-center items-center mt-8 overflow-hidden">
+                    <div class="photo-strip">
+                        <div class="drop-zone" data-slot="1">Drop Here</div>
+                        <div class="drop-zone" data-slot="2">Drop Here</div>
+                        <div class="drop-zone" data-slot="3">Drop Here</div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="app.js"></script>
+        </div>
+    </body>
+</html>
