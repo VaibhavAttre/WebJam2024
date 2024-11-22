@@ -28,6 +28,7 @@ function handleFiles() {
         }
     }
 }
+
 function dragDropFiles() {
     let lists = document.getElementsByClassName("list")
     let rightBox = document.querySelectorAll('#drop-zone .list')
@@ -58,3 +59,4 @@ function dragDropFiles() {
         })
     }
 }
+
