@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <title>Rio</title>
-    </head>
-    <body>
-        <h1>Rio</h1>
-        <h3>Create and edit photo strips!</h3>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <script src = "http://cdnjs.cloudflare.com/ajax/libs/camanjs/3.3.0/caman.full.min.js"></script>        
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Rio</title>
+</head>
+<body class="h-screen overflow-hidden">
+    <div class="flex h-full gap-8">
+        <div class="flex flex-col items-start h-full pb-16 pt-8 w-1/2">
+            <div class="flex flex-col w-5/6 mx-auto items-start">
+                <p class="sm:text-4xl md:text-5xl lg:text-6xl font-bold">Rio</p>
+                <p class="sm:text-1xl md:text-2xl lg:text-3xl font-semibold">Create and edit photo strips!</p>
+                
+                <div class="my-4">
+                    <input type="file" id="file-input" multiple accept="image/*">
+                </div>
+            </div>
+            <div class="w-5/6 flex-grow mx-auto gap-4 gap-y-2 p-4 justify-items-start
+            grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] overflow-auto"
+            id="photo-bank"></div>
+        </div>
+
+        <!-- Photostrip -->
+        <div class="flex flex-col w-1/5 h-5/6 justify-center items-center mt-16 gap-8 overflow-hidden">
+            <div class="photo-strip flex-col">
+                <div class="drop-zone" data-slot="1">Drop Here</div>
+                <div class="drop-zone" data-slot="2">Drop Here</div>
+                <div class="drop-zone" data-slot="3">Drop Here</div>
+                <div class="drop-zone" data-slot="4">Drop Here</div>
+            </div>
+            <button class="slider-btn w-5/6 mt-10" id="saveBtn">Save</button>
+        </div>
+        
+        <!-- Filters, saving and downloading -->
+        <div class="flex flex-col w-1/4 h-5/6 gap-4 ml-8 mt-16 mr-16">
+            <p class="text-lg font-bold mb-2">Drag a filter to an image:</p>
+            <div class="flex flex-col gap-2">
+                <div class="filter" id="none" draggable="true">None</div>
+                <div class="filter" id="grayscale" draggable="true">Grayscale</div>
+                <div class="filter" id="sepia" draggable="true">Sepia</div>
+                <div class="filter" id="invert" draggable="true">Invert</div>
+                <div class="filter" id="blur" draggable="true">Blur</div>
+                <div class="filter" id="polaroid" draggable="true">Polaroid</div>
+                <div class="filter" id="brandywine" draggable="true">Brandywine</div>
+            </div>
+
+            <p class="text-lg font-bold mb-2">Saved Photostrips</p>
+            <div class="w-full flex-grow mx-auto justify-items-start object-container
+            grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] gap-4 overflow-auto"
+            id="savedPhotostripsContainer"></div>
+            <button class="slider-btn justify-center" 
+            id="downloadAllBtn">Download All</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src = "http://cdnjs.cloudflare.com/ajax/libs/camanjs/3.3.0/caman.full.min.js"></script>  
+    <script src="app.js"></script>
+</body>
 </html>
