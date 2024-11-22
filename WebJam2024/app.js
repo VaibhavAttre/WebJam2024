@@ -25,36 +25,31 @@ function handleFiles() {
                 img.src = reader.result;
 
                 img.onload = () => {
-                    // Create the image container
                     const imgContainer = document.createElement('div');
-                    imgContainer.classList.add('image-wrapper', 'p-4', 'rounded-lg', 'bg-white', 'shadow-md', 'drop-shadow-xl'); // Tailwind styles for container
-                    imgContainer.classList.add('droppable'); // Make the image droppable
+                    imgContainer.classList.add('image-wrapper', 'p-4', 'rounded-lg', 'bg-white', 'shadow-md', 'drop-shadow-xl'); 
+                    imgContainer.classList.add('droppable'); 
 
-                    // Create an image element for display
                     const imgElem = document.createElement('img');
                     imgElem.src = reader.result;
-                    imgElem.classList.add('original-image', 'w-full', 'h-auto', 'rounded-lg'); // Tailwind styles for image
+                    imgElem.classList.add('original-image', 'w-full', 'h-auto', 'rounded-lg'); 
                     imgContainer.appendChild(imgElem);
 
-                    // Create the canvas element for applying filters
                     const canvas = document.createElement('canvas');
                     canvas.width = img.width;
                     canvas.height = img.height;
                     imgContainer.appendChild(canvas);
                     photoBank.appendChild(imgContainer);
 
-                    // Set up canvas context and draw the image
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0);
-
-                    // Allow the user to drop a filter on the image
+                        
                     imgContainer.addEventListener('dragover', (e) => {
-                        e.preventDefault(); // Necessary to allow drop
+                        e.preventDefault(); 
                     });
 
                     imgContainer.addEventListener('drop', (e) => {
                         e.preventDefault();
-                        applyFilter(canvas, currentFilter); // Apply the current filter on drop
+                        applyFilter(canvas, currentFilter); 
                     });
                 };
             };

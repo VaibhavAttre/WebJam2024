@@ -1,57 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <script src = "http://cdnjs.cloudflare.com/ajax/libs/camanjs/3.3.0/caman.full.min.js"></script>        
-        <link href="styles.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <title>Rio</title>
-    </head>
-    <body class="h-screen overflow-hidden">
-        <div class="flex h-full gap-8">
-            <div class="flex flex-col items-start h-full pb-16 pt-8
-            w-1/2 bg-gray-100">
-                <div class="flex flex-col w-5/6 mx-auto items-start">
-                    <p class="sm:text-4xl md:text-5xl lg:text-6xl font-bold">Rio</p>
-                    <p class="sm:text-1xl md:text-2xl lg:text-3xl font-semibold">Create and edit photo strips!</p>
-                    
-                    <div class="my-4">
-                        <input type="file" id="file-input" multiple accept="image/*">
-                    </div>
-                </div>
-
-                <div class="w-5/6 flex-grow mx-auto bg-gray-200 gap-4 gap-y-2 p-4 justify-items-start
-                grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] overflow-auto"
-                id="photo-bank"></div>
-            </div>
-
-            <!-- Photostrip Slider -->
-            <div class="h-full w-1/2 mt-20 mr-8">
-                <div class="flex h-2/3 justify-center items-center mt-8 overflow-hidden">
-                    <img class="max-h-full" id="sliderImage" src="./images/photostrip_single.png" alt="photostrips">
-                </div>
-                <div class="flex justify-center items-center my-4 gap-2">
-                    <button id="prevBtn" class="slider-btn">Previous</button>
-                    <button id="nextBtn" class="slider-btn">Next</button>
-                    <button id="saveBtn" class="slider-btn">Save</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <script src = "http://cdnjs.cloudflare.com/ajax/libs/camanjs/3.3.0/caman.full.min.js"></script>        
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Rio</title>
+</head>
+<body class="h-screen overflow-auto">
+    <div class="flex h-full gap-8">
+        <div class="flex flex-col items-start h-full pb-16 pt-8
+        w-1/2 bg-gray-100">
+            <div class="flex flex-col w-5/6 mx-auto items-start">
+                <p class="sm:text-4xl md:text-5xl lg:text-6xl font-bold">Rio</p>
+                <p class="sm:text-1xl md:text-2xl lg:text-3xl font-semibold">Create and edit photo strips!</p>
+                
+                <div class="my-4">
+                    <input type="file" id="file-input" multiple accept="image/*">
                 </div>
             </div>
 
-            <script src="app.js"></script>
+            <div class="w-5/6 flex-grow mx-auto bg-gray-200 gap-4 gap-y-2 p-4 justify-items-start
+            grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] overflow-auto"
+            id="photo-bank"></div>
         </div>
-        <div id="photo-bank" class = "photo-container"></div>
-        <label for="filter-changer">Drag a filter to an image:</label>
-        <div id="filter-bank">
-            <div class="filter" id="none" draggable="true">None</div>
-            <div class="filter" id="grayscale" draggable="true">Grayscale</div>
-            <div class="filter" id="sepia" draggable="true">Sepia</div>
-            <div class="filter" id="invert" draggable="true">Invert</div>
-            <div class="filter" id="blur" draggable="true">Blur</div>
-            <div class="filter" id="polaroid" draggable="true">Polaroid</div>
-            <div class="filter" id="brandywine" draggable="true">Brandywine</div>
+
+        <!-- Photostrip Slider -->
+        <div class="h-full w-1/2 mt-20 mr-8">
+            <div class="flex h-2/3 justify-center items-center mt-8 overflow-hidden">
+                <img class="max-h-full" id="sliderImage" src="./images/photostrip_single.png" alt="photostrips">
+            </div>
+            <div class="flex justify-center items-center my-4 gap-2">
+                <button id="prevBtn" class="slider-btn">Previous</button>
+                <button id="nextBtn" class="slider-btn">Next</button>
+                <button id="saveBtn" class="slider-btn">Save</button>
+            </div>
         </div>
-        <script src="app.js"></script>
-    </body>
+
+    </div>
+    <div id="photo-bank" class = "photo-container"></div>
+    <label for="filter-changer">Drag a filter to an image:</label>
+    <div id="filter-bank">
+        <div class="filter" id="none" draggable="true">None</div>
+        <div class="filter" id="grayscale" draggable="true">Grayscale</div>
+        <div class="filter" id="sepia" draggable="true">Sepia</div>
+        <div class="filter" id="invert" draggable="true">Invert</div>
+        <div class="filter" id="blur" draggable="true">Blur</div>
+        <div class="filter" id="polaroid" draggable="true">Polaroid</div>
+        <div class="filter" id="brandywine" draggable="true">Brandywine</div>
+    </div>
+    <script src="app.js"></script>
+</body>
 </html>
