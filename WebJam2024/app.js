@@ -56,28 +56,56 @@ function handleFiles() {
         }
     }
 }
+
+function applyBrandywineEffect(canvas, imgElem) {
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = imgElem.naturalWidth || imgElem.width;
+    canvas.height = imgElem.naturalHeight || imgElem.height;
+    ctx.drawImage(imgElem, 0, 0, canvas.width, canvas.height);
+
+    const brandywineOverlay = new Image();
+    brandywineOverlay.src = 'filters/Untitled.png'; 
+
+    brandywineOverlay.onload = () => {
+        ctx.globalAlpha = 0.6; 
+
+        ctx.drawImage(brandywineOverlay, 0, 0, canvas.width, canvas.height);
+
+        ctx.globalAlpha = 1.0;
+
+        ctx.font = '36px Arial'; 
+        ctx.fillStyle = 'white'; 
+        ctx.textAlign = 'center'; 
+        ctx.textBaseline = 'middle'; 
+        ctx.shadowColor = 'black'; 
+        ctx.shadowBlur = 5;
+        ctx.fillText("Brandywine", canvas.width / 2, canvas.height/2); 
+
+        imgElem.src = canvas.toDataURL();
+    };
+}
+
+
 function applyImageFilter(imgElem, filterType) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
-    // Set canvas size to match the image size
     canvas.width = imgElem.naturalWidth || imgElem.width;
     canvas.height = imgElem.naturalHeight || imgElem.height;
 
-    // Apply the filter to the canvas
-    ctx.filter = getFilterStyle(filterType);
+    if (filterType === "brandywine") {
+        applyBrandywineEffect(canvas, imgElem);
+    } else {
+        ctx.filter = getFilterStyle(filterType);
+        ctx.drawImage(imgElem, 0, 0, canvas.width, canvas.height);
+    }
 
-    // Draw the image onto the canvas with the filter applied
-    ctx.drawImage(imgElem, 0, 0, canvas.width, canvas.height);
-
-    // Get the filtered image data as a data URL
     const filteredImageDataUrl = canvas.toDataURL();
-
-    // Update the original image element with the new filtered image
     imgElem.src = filteredImageDataUrl;
 }
 
-// Function to get the filter style for an image
+
 function getFilterStyle(filterType) {
     switch (filterType) {
         case "grayscale":
@@ -91,14 +119,13 @@ function getFilterStyle(filterType) {
         case "polaroid":
             return 'contrast(90%) saturate(80%) brightness(110%)';
         case "brandywine":
-            return 'sepia(100%) contrast(80%) brightness(110%)';
+            return 'brandywine';
         default:
-            return 'none'; // No filter
+            return 'none'; 
     }
 }
 
 
-// Dragging images from the photobank out
 
 function handleDragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.src);
@@ -124,18 +151,11 @@ dropZones.forEach(zone => {
         const imageSrc = event.dataTransfer.getData('text/plain');
         const imageId = event.dataTransfer.getData('image-id');
 
-        // Create the image element and set the source
         const img = document.createElement('img');
         img.src = imageSrc;
         img.setAttribute('data-id', imageId);
 
-        /*
-        // Apply the filter to the dropped image (if any)
-        if (currentFilter !== 'none') {
-            applyImageFilter(img, currentFilter);
-        }*/
 
-        // Clear the drop zone and append the image
         event.currentTarget.innerHTML = '';
         event.currentTarget.appendChild(img);
     });
@@ -149,7 +169,7 @@ const downloadAllBtn = document.getElementById('downloadAllBtn');
 // Save the combined photostrip with images from drop zones
 saveBtn.addEventListener('click', saveScreenshot);
 function saveScreenshot() {
-    const photostripContainer = document.querySelector('.photo-strip'); // Select the container of the photostrip + drop zone images
+    const photostripContainer = document.querySelector('.photo-strip'); 
 
     if (!photostripContainer) {
         alert('No photostrip to save!');
@@ -158,22 +178,20 @@ function saveScreenshot() {
 
     html2canvas(photostripContainer, {
         useCORS: true,
-        scale: 2, // Increase the resolution of the canvas for better quality
-        backgroundColor: null, // Maintain transparency if needed
-        scrollX: window.scrollX, // Account for horizontal scrolling
-        scrollY: window.scrollY, // Account for vertical scrolling
-        width: photostripContainer.scrollWidth, // Full width of the container
-        height: photostripContainer.scrollHeight, // Full height of the container
+        scale: 10, 
+        backgroundColor: null,
+        scrollX: window.scrollX,
+        scrollY: window.scrollY, 
+        width: photostripContainer.scrollWidth, 
+        height: photostripContainer.scrollHeight, 
     }).then(canvas => {
         const imageDataUrl = canvas.toDataURL();
 
-        // Display the saved combined photostrip
         const combinedImage = document.createElement('img');
         combinedImage.src = imageDataUrl;
         combinedImage.alt = 'Combined Photostrip';
         combinedImage.classList.add('w-auto', 'h-auto', 'rounded');
 
-        // Add the photostrip to the saved photostrips container
         const photostripDiv = document.createElement('div');
         photostripDiv.classList.add('relative', 'bg-white', 'p-2', 'rounded', 'shadow-md', 'flex', 'items-center', 'justify-center');
         photostripDiv.appendChild(combinedImage);
@@ -182,53 +200,7 @@ function saveScreenshot() {
     });
 }
 
-/*
-function saveScreenshot() {
-    const photostripContainer = document.querySelector('.photo-strip'); // Select the container of the photostrip + drop zone images
 
-    if (!photostripContainer) {
-        alert('No photostrip to save!');
-        return;
-    }
-
-    // Ensure the images inside the container don't stretch (optional: set their max-width and height)
-    const images = photostripContainer.querySelectorAll('img');
-    images.forEach(img => {
-        img.style.objectFit = 'contain';  // Ensures the images maintain their aspect ratio inside the container
-    });
-
-    
-    html2canvas(photostripContainer, {
-        useCORS: true, 
-        scale: 1, 
-        allowTaint: true, 
-        backgroundColor: null, 
-        logging: false, 
-        x: window.scrollX, 
-        y: window.scrollY, 
-        width: photostripContainer.scrollWidth, 
-        height: photostripContainer.scrollHeight, 
-    }).then(canvas => {
-        // Convert the canvas to a data URL (image)
-        const imageDataUrl = canvas.toDataURL();
-
-        // Create an image element to display the saved combined photostrip
-        const combinedImage = document.createElement('img');
-        combinedImage.src = imageDataUrl;
-        combinedImage.alt = 'Combined Photostrip';
-        combinedImage.classList.add('w-auto', 'h-auto', 'rounded'); 
-
-        // Create a div to hold the new photostrip
-        const photostripDiv = document.createElement('div');
-        photostripDiv.classList.add('relative', 'bg-white', 'p-2', 'rounded', 'shadow-md', 'flex', 'items-center', 'justify-center');
-        photostripDiv.appendChild(combinedImage);
-
-        // Add the combined photostrip to the container
-        savedPhotostripsContainer.appendChild(photostripDiv);
-    });
-}
-*/
-// Download all photostrips as a ZIP file
 downloadAllBtn.addEventListener('click', () => {
     const photostripImages = savedPhotostripsContainer.querySelectorAll('img');
     if (photostripImages.length === 0) {
