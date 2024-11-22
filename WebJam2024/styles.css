@@ -34,20 +34,25 @@ body {
     background-color: #0056b3;
 }
 
+.filter {
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
 .photo-strip {
     display: flex;
-    height: 400px;
-    width: 167px;
-    gap: 8.5px;
-    padding-top: 12.5px;
-    padding-left: 25.5px;
+    height: 600px;
+    width: 250px;
+    gap: 12.75px;
+    padding-top: 17.5px;
+    padding-left: 37.75px;
     background-size: cover;
     background-image: url("./images/photostrip_vert.png");
 }
 
 .drop-zone {
-    width: 115.5px;
-    height: 88px;
+    width: 173.25px;
+    height: 132px;
     border: 2px dashed #aaa;
     display: flex;
     align-items: center;

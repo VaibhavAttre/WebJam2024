@@ -11,7 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Rio</title>
 </head>
-<body class="h-screen overflow-auto">
+<body class="h-screen overflow-hidden">
     <div class="flex h-full gap-8">
         <div class="flex flex-col items-start h-full pb-16 pt-8
         w-1/2 bg-gray-100">
@@ -27,39 +27,39 @@
             grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] overflow-auto"
             id="photo-bank"></div>
         </div>
-            <!-- Photostrip Slider -->
-            <div class="h-full w-1/2 mt-20 mr-8">
-                <div class="flex h-1/2 justify-center items-center mt-8 overflow-hidden">
-                    <div class="photo-strip flex-col">
-                        <div class="drop-zone" data-slot="1">Drop Here</div>
-                        <div class="drop-zone" data-slot="2">Drop Here</div>
-                        <div class="drop-zone" data-slot="3">Drop Here</div>
-                        <div class="drop-zone" data-slot="4">Drop Here</div>
-                    </div>
-                </div>
-                <div class="flex justify-center items-center my-4 gap-2">
-                    <button id="saveBtn" class="slider-btn">Save</button>
-                </div>
-                <div class="h-1/3 overflow-auto p-4" id="savedPhotostrips">
-                    <p class="text-lg font-bold mb-2">Saved Photostrips</p>
-                    <div id="savedPhotostripsContainer" class="grid grid-cols-2 gap-4"></div>
-                </div>
-                <button id="downloadAllBtn" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Download All</button>
+
+        <!-- Photostrip -->
+        <div class="flex flex-col w-1/5 h-5/6 justify-center items-center mt-16 gap-8 overflow-hidden">
+            <div class="photo-strip flex-col">
+                <div class="drop-zone" data-slot="1">Drop Here</div>
+                <div class="drop-zone" data-slot="2">Drop Here</div>
+                <div class="drop-zone" data-slot="3">Drop Here</div>
+                <div class="drop-zone" data-slot="4">Drop Here</div>
+            </div>
+            <button class="slider-btn w-5/6 mt-10" id="saveBtn">Save</button>
+        </div>
+
+        <div class="flex flex-col w-1/4 h-5/6 gap-4 ml-8 mt-16 mr-16">
+            <p class="text-lg font-bold mb-2">Drag a filter to an image:</p>
+            <div class="flex flex-col gap-2">
+                <div class="filter" id="none" draggable="true">None</div>
+                <div class="filter" id="grayscale" draggable="true">Grayscale</div>
+                <div class="filter" id="sepia" draggable="true">Sepia</div>
+                <div class="filter" id="invert" draggable="true">Invert</div>
+                <div class="filter" id="blur" draggable="true">Blur</div>
+                <div class="filter" id="polaroid" draggable="true">Polaroid</div>
+                <div class="filter" id="brandywine" draggable="true">Brandywine</div>
             </div>
 
+            <p class="text-lg font-bold mb-2">Saved Photostrips</p>
+            <div class="w-full flex-grow mx-auto bg-gray-200 justify-items-start
+            grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] gap-4 overflow-auto"
+            id="savedPhotostripsContainer"></div>
+            <button class="slider-btn justify-center" 
+            id="downloadAllBtn">Download All</button>
+        </div>
+    </div>
 
-    </div>
-    
-    <label for="filter-changer">Drag a filter to an image:</label>
-    <div id="filter-bank">
-        <div class="filter" id="none" draggable="true">None</div>
-        <div class="filter" id="grayscale" draggable="true">Grayscale</div>
-        <div class="filter" id="sepia" draggable="true">Sepia</div>
-        <div class="filter" id="invert" draggable="true">Invert</div>
-        <div class="filter" id="blur" draggable="true">Blur</div>
-        <div class="filter" id="polaroid" draggable="true">Polaroid</div>
-        <div class="filter" id="brandywine" draggable="true">Brandywine</div>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src = "http://cdnjs.cloudflare.com/ajax/libs/camanjs/3.3.0/caman.full.min.js"></script>  
     <script src="app.js"></script>

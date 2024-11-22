@@ -2,13 +2,12 @@ const fileInput = document.getElementById('file-input');
 const photoBank = document.getElementById('photo-bank');
 let currentFilter = 'none';
 
-// Handle file input (photo upload)
 fileInput.addEventListener('change', handleFiles);
 
 const filters = document.querySelectorAll('.filter');
 filters.forEach(filter => {
     filter.addEventListener('dragstart', (e) => {
-        currentFilter = e.target.id;  // Store the currently dragged filter
+        currentFilter = e.target.id;
     });
 });
 
@@ -25,29 +24,26 @@ function handleFiles() {
 
                 img.onload = () => {
                     const imgContainer = document.createElement('div');
-                    imgContainer.classList.add('image-wrapper', 'p-4', 'rounded-lg', 'bg-white', 'shadow-md', 'drop-shadow-xl');
+                    imgContainer.classList.add('image-wrapper');
                     imgContainer.classList.add('droppable');
 
                     const imgElem = document.createElement('img');
                     imgElem.src = reader.result;
-                    imgElem.classList.add('original-image', 'w-full', 'h-auto', 'rounded-lg');
-                    
+                    imgElem.classList.add('original-image', 'w-auto', 'h-full', 'rounded-lg');
 
-                    // Apply the current filter to the uploaded image directly
                     if (currentFilter !== 'none') {
                         applyImageFilter(imgElem, currentFilter);
                     }
                     imgContainer.appendChild(imgElem);
                     photoBank.appendChild(imgContainer);
 
-                    // Add event listeners for drag-and-drop functionality
                     imgContainer.addEventListener('dragover', (e) => {
                         e.preventDefault();
                     });
 
                     imgContainer.addEventListener('drop', (e) => {
                         e.preventDefault();
-                        applyImageFilter(imgElem, currentFilter); // Apply filter to the image when dropped
+                        applyImageFilter(imgElem, currentFilter); 
                     });
                 };
             };
@@ -86,7 +82,6 @@ function applyBrandywineEffect(canvas, imgElem) {
     };
 }
 
-
 function applyImageFilter(imgElem, filterType) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -104,7 +99,6 @@ function applyImageFilter(imgElem, filterType) {
     const filteredImageDataUrl = canvas.toDataURL();
     imgElem.src = filteredImageDataUrl;
 }
-
 
 function getFilterStyle(filterType) {
     switch (filterType) {
@@ -124,8 +118,6 @@ function getFilterStyle(filterType) {
             return 'none'; 
     }
 }
-
-
 
 function handleDragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.src);
@@ -161,13 +153,12 @@ dropZones.forEach(zone => {
     });
 });
 
-
 const saveBtn = document.getElementById('saveBtn');
 const savedPhotostripsContainer = document.getElementById('savedPhotostripsContainer');
 const downloadAllBtn = document.getElementById('downloadAllBtn');
 
-// Save the combined photostrip with images from drop zones
 saveBtn.addEventListener('click', saveScreenshot);
+
 function saveScreenshot() {
     const photostripContainer = document.querySelector('.photo-strip'); 
 
@@ -190,16 +181,15 @@ function saveScreenshot() {
         const combinedImage = document.createElement('img');
         combinedImage.src = imageDataUrl;
         combinedImage.alt = 'Combined Photostrip';
-        combinedImage.classList.add('w-auto', 'h-auto', 'rounded');
+        combinedImage.classList.add('w-auto', 'h-auto');
 
         const photostripDiv = document.createElement('div');
-        photostripDiv.classList.add('relative', 'bg-white', 'p-2', 'rounded', 'shadow-md', 'flex', 'items-center', 'justify-center');
+        photostripDiv.classList.add('relative', 'p-2');
         photostripDiv.appendChild(combinedImage);
 
         savedPhotostripsContainer.appendChild(photostripDiv);
     });
 }
-
 
 downloadAllBtn.addEventListener('click', () => {
     const photostripImages = savedPhotostripsContainer.querySelectorAll('img');
