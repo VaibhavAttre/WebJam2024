@@ -2,18 +2,41 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
-
-#photo-bank {
+.container{
+    width: 100%;
+    min-height: 200px;
+    backgrOUND: #0b0423;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    align-items: center;
     justify-content: center;
-    margin-top: 20px;
+}
+#photo-bank{
+    width: 440px;
+    min-height: 100px;
+    margin: 20px;
+    backgrOUND: #90a24d;
+    border: 2px dashed #fff;
+}
+#drop-zone{
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    backgrOUND: #0da341;
+    border: 2px dashed #fff;
 }
 
-#photo-bank img {
-    max-width: 150px;
-    max-height: 150px;
-    border: 1px solid #000;
-    border-radius: 5px
+.list{
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    align-items: center;
+    cursor: grab;
+    display: flex;
+}
+.list img{
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    padding: 5px
 }
