@@ -79,6 +79,37 @@ function applyPolaroidEffect(canvas) {
     });
 }
 
+function applyBrandywineEffect(canvas) {
+
+    // Get the canvas context
+    const ctx = canvas.getContext('2d');
+
+    // Create the Brandywine overlay image
+    const brandywineOverlay = new Image();
+    brandywineOverlay.src = 'filters/Untitled.png'; // Replace with the overlay image path
+
+    brandywineOverlay.onload = () => {
+        // Set the global alpha for transparency (optional)
+        ctx.globalAlpha = 0.6; // Adjust transparency of overlay (0.0 to 1.0)
+
+        // Draw the overlay image on top of the existing canvas content
+        ctx.drawImage(brandywineOverlay, 0, 0, canvas.width, canvas.height);
+
+        // Reset global alpha to default
+        ctx.globalAlpha = 1.0;
+
+        ctx.font = '36px Arial'; // Set font size and family
+        ctx.fillStyle = 'white'; // Set text color (adjust as needed)
+        ctx.textAlign = 'center'; // Center the text horizontally
+        ctx.textBaseline = 'middle'; // Center the text vertically
+        ctx.fillText("Brandywine", canvas.width / 2, canvas.height / 2); // Draw text at the center
+
+        // Optional: Add shadow to make the text stand out
+        ctx.shadowColor = 'black';
+        ctx.shadowBlur = 5;
+    };
+}
+
 function applyFilter(canvas, filterType) {
     // Use CamanJS to apply the selected filter
     Caman(canvas, function() {
@@ -98,10 +129,13 @@ function applyFilter(canvas, filterType) {
                     this.invert();
                     break;
                 case "blur":
-                    this.stackBlur(5); // Adjust blur amount as needed
+                    this.stackBlur(5); 
                     break;
                 case "polaroid":
                     applyPolaroidEffect(canvas);
+                    break;
+                case "brandywine":
+                    applyBrandywineEffect(canvas);
                     break;
                 default:
                     break;
