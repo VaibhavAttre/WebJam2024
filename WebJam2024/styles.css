@@ -11,7 +11,7 @@ body {
     justify-content: center;
 }
 #photo-bank{
-    width: 440px;
+    width: 430px;
     min-height: 100px;
     margin: 20px;
     backgrOUND: #90a24d;
@@ -19,7 +19,7 @@ body {
 }
 #drop-zone{
     width: 100px;
-    height: 100px;
+    height: 100%;
     margin: 20px;
     backgrOUND: #0da341;
     border: 2px dashed #fff;
@@ -27,16 +27,16 @@ body {
 
 .list{
     flex-wrap: wrap;
-    height: 100%;
+    min-height: 100px;
     width: 100%;
     color: #fff;
     align-items: center;
     cursor: grab;
     display: flex;
+    gap: 10px;
 }
 .list img{
     width: 100px;
     height: 100px;
     align-items: center;
-    padding: 5px
 }
